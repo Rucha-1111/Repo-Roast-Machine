@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Repo Roast Machine</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Repo Roast Machine</h1>
+
+        <form id="roastForm">
+            <input type="text" id="username" placeholder="Enter GitHub username..." required>
+            <button type="submit">Roast</button>
+        </form>
+
+        <div class="loading" id="loading">
+            Analyzing your questionable coding life...
+        </div>
+
+        <div class="roast-box" id="roastBox"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById("roastForm");
+        const roastBox = document.getElementById("roastBox");
+        const loading = document.getElementById("loading");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            if (!username) return;
+
+            roastBox.style.display = "none";
+            roastBox.innerHTML = "";
+            loading.style.display = "block";
+
+            try {
+                const response = await fetch("/roast", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: `username=${encodeURIComponent(username)}`
+                });
+
+                const data = await response.json();
+                loading.style.display = "none";
+
+                if (response.ok && data.roast) {
+                    roastBox.style.display = "block";
+                    renderRoast(data.roast, roastBox, data.summary || {});
+                } else {
+                    roastBox.innerHTML = `<span class="error-msg">${data.error || 'Unknown server error'}</span>`;
+                    roastBox.style.display = "block";
+                }
+            } catch (error) {
+                loading.style.display = "none";
+                roastBox.innerHTML = `<span class="error-msg">Network error. Is the server running?</span>`;
+                roastBox.style.display = "block";
+            }
+        });
+
+        function renderRoast(text, element, summary) {
+            const roastContainer = document.createElement("div");
+            roastContainer.id = "roast-container";
+            element.appendChild(roastContainer);
+
+            // Split into paragraphs by double newline, or sentences for single blocks
+            let paragraphs = text.split(/\n\n+/).filter(p => p.trim());
+
+            // If only one paragraph (LLM returned wall of text), split by sentences
+            if (paragraphs.length === 1) {
+                paragraphs = text
+                    .replace(/([.!?])\s+/g, "$1\n")
+                    .split("\n")
+                    .filter(s => s.trim().length > 10);
+            }
+
+            let i = 0;
+
+            function addNextLine() {
+                if (i >= paragraphs.length) {
+                    // Roast complete - delay then show detailed summary
+                    setTimeout(() => renderDetailedSummary(summary, element), 1000);
+                    return;
+                }
+
+                const line = document.createElement("span");
+                line.className = "roast-line";
+                roastContainer.appendChild(line);
+
+                typeInto(paragraphs[i].trim(), line, () => {
+                    i++;
+                    setTimeout(addNextLine, 120);
+                });
+            }
+
+            addNextLine();
+        }
+
+        function renderDetailedSummary(summary, container) {
+            const summaryBox = document.createElement("div");
+            summaryBox.className = "summary-box";
+            let content = `
+                <div class="summary-header">// PROFESSIONAL ANALYTICS & IMPROVEMENT PLAN</div>
+                <div class="stats-grid">
+                    <div class="stat-item">Repos: <span class="stat-value">${summary.total_repos || 0}</span></div>
+                    <div class="stat-item">Commits: <span class="stat-value">${summary.total_commits || 0}</span></div>
+                    <div class="stat-item">Stars: <span class="stat-value">${summary.total_stars || 0}</span></div>
+                    <div class="stat-item">Followers: <span class="stat-value">${summary.followers || 0}</span></div>
+                    <div class="stat-item">README %: <span class="stat-value">${summary.readme_pct || 0}%</span></div>
+                    <div class="stat-item">Primary Lang: <span class="stat-value">${summary.primary_lang || 'N/A'}</span></div>
+                </div>
+            `;
+
+            if (summary.commit_patterns && summary.commit_patterns.length) {
+                content += `
+                    <div class="patterns-list">
+                        <span class="patterns-label">Top Commit Patterns:</span>
+                        <div>${summary.commit_patterns.slice(0,4).join(', ')}</div>
+                    </div>
+                `;
+            }
+
+            if (summary.analysis && summary.analysis.length) {
+                content += `<div class="analysis-section">Key Insights: ${summary.analysis.slice(0,3).join('. ')}.</div>`;
+            }
+
+            if (summary.tips && summary.tips) {
+                content += `<div class="improvements-section">"Quick Wins: ${summary.tips}"</div>`;
+            }
+
+            summaryBox.innerHTML = content;
+            container.appendChild(summaryBox);
+        }
+
+        function typeInto(text, element, onDone) {
+            let j = 0;
+            const cursor = document.createElement("span");
+            cursor.className = "cursor";
+            element.appendChild(cursor);
+
+            function tick() {
+                if (j < text.length) {
+                    cursor.insertAdjacentText("beforebegin", text.charAt(j));
+                    j++;
+                    setTimeout(tick, 18);
+                } else {
+                    cursor.remove();
+                    if (onDone) onDone();
+                }
+            }
+            tick();
+        }
+    </script>
+
+</body>
+</html>
