@@ -2,8 +2,10 @@
 
 from flask import Flask, request, send_file
 from utils import fetch_github_data, generate_roast
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder='.', static_url_path='')
+CORS(app)
 
 @app.route("/", methods=["GET"])
 def home():
