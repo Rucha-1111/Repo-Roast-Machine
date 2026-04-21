@@ -4,3 +4,4 @@ python-dotenv
 google-generativeai==0.8.3
 groq
 gunicorn
+flask-cors
