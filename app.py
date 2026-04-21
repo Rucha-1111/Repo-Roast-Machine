@@ -5,7 +5,7 @@ from utils import fetch_github_data, generate_roast
 from flask_cors import CORS
 
 app = Flask(__name__, static_folder='.', static_url_path='')
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 
 @app.after_request
 def after_request(response):
@@ -18,8 +18,11 @@ def after_request(response):
 def home():
     return send_file("index.html")
 
-@app.route("/roast", methods=["POST"])
+@app.route("/roast", methods=["POST", "OPTIONS"])
 def roast():
+    if request.method == "OPTIONS":
+        return {}, 200
+
     try:
         username = request.form.get("username", "").strip()
         if not username:
