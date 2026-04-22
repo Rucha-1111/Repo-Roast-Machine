@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <b>34 repos analyzed • 8 behavioral signals • 0 mercy</b>
+  <b> 0 mercy</b>
 </p>
 
 ---
