@@ -29,9 +29,9 @@ Everything ties back to your actual code history.
 ## 🖥️ Product Preview
 
 <p align="center">
-  <img src="./assets/emotionaldamage1.png" width="48%" />
-  <img src="./assets/emotionaldamage2.png" width="48%" />
-   <img src="./assets/emotionaldamage3.png" width="48%" />
+  <img src="./assets/emotionaldamage1.png" width="100%" /><br/>
+  <img src="./assets/emotionaldamage2.png" width="100%" /><br/>
+  <img src="./assets/emotionaldamage3.png" width="100%" />
 </p>
 
 ---
