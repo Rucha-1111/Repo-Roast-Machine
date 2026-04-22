@@ -1,114 +1,171 @@
-# Repo Roast Machine
+# 🔥 Repo Roast Machine
 
-## Overview
+### *Your GitHub. Audited. Profiled. Roasted.*
 
-Repo Roast Machine is a GitHub analysis tool that takes a username, pulls their public repository data, and converts it into a brutally honest AI-generated roast.
+<p align="center">
+  <img src="./assets/demo.gif" width="90%" />
+</p>
 
-It is built on a simple principle: your GitHub history is a personality test you did not consent to.
-
----
-
-## What it does
-
-It analyzes a developer’s GitHub footprint using real data:
-
-* Repository names (creative genius or “test123” syndrome)
-* README quality (present, empty, or emotionally abandoned)
-* Commit messages (professional or psychological breakdown)
-* Activity timeline (consistent developer or seasonal coder)
-* Language usage (polyglot engineer or one-language survival mode)
-* Stars, forks, and engagement metrics
-
-This structured data is sent to a language model which generates a contextual roast based entirely on observable behavior.
+<p align="center">
+  <b>34 repos analyzed • 8 behavioral signals • 0 mercy</b>
+</p>
 
 ---
 
-## Example output
+## 🧨 What this is
 
-“24 repositories detected. 18 of them are either called ‘final’, ‘final2’, or ‘final_really_final’. None of them are final.
+A behavioral analysis engine disguised as a roast tool.
 
-Your commit history reads like a panic attack logged in Git form: ‘fix’, ‘fix bug’, ‘working now’, ‘pls don’t break’.
+You enter a GitHub username.
+It extracts patterns from real data.
+Then generates a context-aware roast using those patterns.
 
-Your most recent activity is old enough to apply for historical classification.
-
-At this point, your GitHub is not a portfolio. It is a digital graveyard of good intentions.”
-
----
-
-## Why this exists
-
-Most developer tools reward activity.
-
-This one rewards honesty.
-
-It highlights:
-
-* Abandoned projects
-* Inconsistent coding habits
-* Placeholder repos that never evolved
-* Commit messages that reveal emotional states
-
-It turns GitHub into a behavioral mirror with commentary.
+No randomness.
+No generic insults.
+Everything ties back to your actual code history.
 
 ---
 
-## Tech stack
+## 🖥️ Product Preview
 
-* GitHub REST API for data extraction
-* Python for backend processing
-* OpenAI / Gemini API for roast generation
-* Flask / Streamlit for UI
-* HTML, CSS, JavaScript for frontend presentation
-
----
-
-## System flow
-
-1. User enters GitHub username
-2. GitHub API fetches repository metadata
-3. Data is cleaned and structured
-4. Prompt is engineered with behavioral context
-5. LLM generates roast response
-6. UI displays output with dramatic formatting
+<p align="center">
+  <img src="./assets/homepage.png" width="48%" />
+  <img src="./assets/roast-output.png" width="48%" />
+</p>
 
 ---
 
-## Environment variables
+## 🧠 Signal Extraction Engine
 
-Create a `.env` file:
-
-GITHUB_TOKEN=your_github_token
-GEMINI_API_KEY=your_llm_api_key
-
-Do not commit this file.
+```text
+Repository Naming Patterns     → final_v2_last_REAL
+Commit Message Behavior       → "fix", "pls work", "ok done"
+Project Completion Ratio      → active vs abandoned
+README Coverage               → documented vs neglected
+Language Distribution         → focused vs scattered
+Activity Timeline             → consistent vs burst-based
+Engagement Metrics            → stars, followers
+```
 
 ---
 
-## Installation
+## 💀 Sample Output
 
-git clone [https://github.com/Rucha-1111/Repo-Roast-Machine.git](https://github.com/Rucha-1111/Repo-Roast-Machine.git)
+> 28 repositories detected. 16 of them are some variation of “final”.
+> That’s not versioning. That’s coping.
+>
+> Your commit history escalates like a system under stress:
+> “fix”, “fix again”, “ok working”, “wait no”.
+>
+> Your README coverage suggests documentation is an optional feature.
+>
+> This is not a portfolio.
+> It is version-controlled indecision.
+
+---
+
+## ⚙️ Architecture
+
+```text
+[ Username Input ]
+        ↓
+[ GitHub API Layer ]
+        ↓
+[ Data Structuring ]
+        ↓
+[ Behavioral Analysis Engine ]
+        ↓
+[ Prompt Engineering Layer ]
+        ↓
+[ LLM (Roast Generation) ]
+        ↓
+[ UI Rendering Engine ]
+```
+
+---
+
+## 🏗 Tech Stack
+
+| Layer       | Technology                            |
+| ----------- | ------------------------------------- |
+| Backend     | Flask (Python)                        |
+| Frontend    | HTML, CSS, JavaScript                 |
+| Data Source | GitHub REST API                       |
+| AI Engine   | Groq (LLaMA 3.3)                      |
+| Processing  | Custom analytics + prompt engineering |
+
+---
+
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/Rucha-1111/Repo-Roast-Machine.git
 cd Repo-Roast-Machine
 pip install -r requirements.txt
 python app.py
+```
+
+Open:
+
+```
+http://127.0.0.1:5000
+```
 
 ---
 
-## Security note
+## 🔐 Environment
 
-This project only uses public GitHub data.
-
-However, API keys must never be exposed or pushed to GitHub.
-
-If you did, the internet already judged you before this tool did.
+```env
+GITHUB_TOKEN=your_github_token
+GROQ_API_KEY=your_groq_api_key
+```
 
 ---
 
-## License
+## 📁 Project Structure
+
+```
+/project
+ ├── app.py
+ ├── utils.py
+ ├── index.html
+ ├── static/
+ │    └── style.css
+ ├── assets/
+ │    ├── emotionaldamage1.png
+ │    ├── emotionaldamage2.png
+ │    └── emotionaldamage3.png
+ └── .env
+```
+
+---
+
+## ⚠️ Constraints
+
+* Uses only public GitHub data
+* Subject to GitHub API rate limits
+* No fabricated insights — only derived patterns
+
+---
+
+## 📉 Philosophy
+
+Most tools optimize for:
+
+> activity
+
+This system exposes:
+
+> behavior
+
+---
+
+## 📜 License
 
 Educational use only.
 
-Not responsible for:
+Possible side effects:
 
-* emotional damage
-* sudden repository renaming
-* existential developer crises
+* deleting half your repositories
+* rewriting commit history
+* renaming everything from “final”
