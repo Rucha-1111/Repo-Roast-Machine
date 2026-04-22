@@ -40,7 +40,7 @@
             loading.style.display = "block";
 
             try {
-                const response = await fetch("https://repo-roast-machine.onrender.com/roast", {
+                const response = await fetch("http://localhost:5000/roast", {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: `username=${encodeURIComponent(username)}`
